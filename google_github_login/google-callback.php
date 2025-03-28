@@ -4,8 +4,11 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-$client_id = '561213811356-k41ehq89ka0orou982ml0k3ppjpeinhe.apps.googleusercontent.com';
-$client_secret = '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';
+$client_id = getenv('GOOGLE_CLIENT_ID'); // Inserisci qui il tuo Client ID
+$client_secret = getenv('GOOGLE_CLIENT_SECRET'); // Inserisci qui il tuo Client Secret
+if (empty($client_id) || empty($client_secret)) {
+    die("Client ID o Client Secret non configurati.");
+}
 $redirect_uri = 'http://localhost/provalogin/google_github_login/google-callback.php';
 
 if (isset($_GET['code'])) {

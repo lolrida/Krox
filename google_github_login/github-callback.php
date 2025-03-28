@@ -1,8 +1,11 @@
 <?php
 session_start();
 
-$client_id = 'Ov23likdWE1IG7W8BbxM'; 
-$client_secret = 'c3d0b3cbee1d66b5ca21a7f953b7c0d0294a4479';
+$client_id = getenv('GITHUB_CLIENT_ID'); 
+$client_secret = getenv('GITHUB_CLIENT_SECRET');
+if (empty($client_id) || empty($client_secret)) {
+    die("Client ID o Client Secret non configurati.");
+}
 $github_login_url = "https://github.com/login/oauth/authorize?client_id=$client_id&redirect_uri=$redirect_uri&scope=user:email";
 if (isset($_GET['code'])) {
     // Scambia il codice per un access token
